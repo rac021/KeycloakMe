@@ -11,7 +11,7 @@ keycloakMe is a java project that allows you to create/remove Realms, Clients, U
      mvn clean package
  
  
- 2- Usage ( run the jar by provinding the file configuration )
+ 2- Usage ( run the jar by providing the file configuration )
  
      java -jar target/keycloakMe.jar $(pwd)/keycloak.txt
 
