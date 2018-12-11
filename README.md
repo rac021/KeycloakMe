@@ -1,6 +1,8 @@
 # KeycloakMe
 
-keycloakMe allows you to start a **keycloak server** in **HTTP/HTTPS mode**.
+keycloakMe allows you to start a **keycloak server** in **HTTP/HTTPS mode**
+
+Also provides a client that automatically create Realm, Client, Users, Roles, and affects Roles to the Users 
 
 ----------------------------------------------------------
 
@@ -33,3 +35,18 @@ keycloakMe allows you to start a **keycloak server** in **HTTP/HTTPS mode**.
  
          Goto : https://localhost:8543
  
+  4- Create Admin User ( with Login/Password : admin/admin ) :
+  
+        ./keycloak_client.sh adduser admin admin
+        
+
+  5- Create Realm, Client, Users, Roles..
+  
+   * IF **HTTP** MODE :
+   
+         ./keycloak_client.sh http admin admin   
+   
+   * IF **HTTPS** MODE :
+   
+         ./keycloak_client.sh https admin admin
+         
