@@ -27,7 +27,6 @@ HTTPS_SERVER_BASE="https://localhost:8543"
 
 SERVER_AUTH="$HTTP_SERVER_BASE/auth" 
 
-
 KEYCLAK_DIRECTORY="keycloak-4.6.0/bin"
 
 ####################################################
