@@ -2,7 +2,7 @@
 
 keycloakMe allows you to start a **keycloak server** in **HTTP/HTTPS mode**
 
-Also provides a client that automatically create Realm, Client, Users, Roles, and affects Roles to the Users 
+Also provides a client that automatically creates Realm, Client, Users, Roles, and affects Roles to the Users 
 
 ----------------------------------------------------------
 
