@@ -4,57 +4,58 @@
 
 # Description of REALM_MASTER_AUTHENTICATION :
 # Informations of the Authentication on the keycloak server
-# master_name , client_id, userName, password, rotocole used by clients
+# master_name , client_id, userName, password, protocole used by clients
 
 # Description of Creation of a Realm
-# realm_name that will be created 
+# realm_name that will be created ,
+# if REMOVE-IF-EXITS is provided : Realm will be recreated ( if REALM exists, elses reused )
 
 # Description Of Creatation of a CLIENT : 
-# Create Client in aspecific Realm with client_id + secret_id and assign to it a lis of Roles
+# Create Client in aspecific Realm with client_id + secret_id and assign to it a list of Roles
 # realm_name, clientId, sercretId, list of the roles separated by blank space
+# if REMOVE-IF-EXITS is provided : Client will be recreated ( if CLIENT exists, else reused )
 
 # Description Of Creation of a USER : 
 # Create User with userName, password in a specific Client and specific Realm + assign to it list of Roles
 # realm_name, clientId, userName, password, list of the roles separated by blank space
-
+# if REMOVE-IF-EXITS is provided : User will be recreated ( if USER exists, else reused )
 
 ### Authentication Part ##########################################################
 
 URL                         : http://localhost:8180/auth
 REALM_MASTER_AUTHENTICATION : master, admin-cli , admin , admin, openid-connect
 
-
 ##################################################################################
 ### Management Part ####################      EXAMPLE      #######################
 ##################################################################################
 
-## Create Realm 
-REALM  : realm_name 
+## Create Realm  ( remove it if it already axists )
+REALM  : realm_name , REMOVE-IF-EXITS
 
-## Create Client
-CLIENT : realm_name, client_id_app , client_secret_id   , admin   public   tester
+## Create Client ( remove it if it already axists )
+CLIENT : realm_name, client_id_app , client_secret_id   , admin  public  tester, REMOVE-IF-EXITS
 
-## Create User ONE 
-USER   : realm_name, client_id_app , user_1 , password  , admin   tester
+## Create User ONE ( remove it if it already axists )
+USER   : realm_name, client_id_app , user_1 , password  , admin tester , REMOVE-IF-EXITS
 
-## Create User TWO
-USER   : realm_name, client_id_app , user_2 , password  , public 
+## Create User TWO ( remove it if it already axists )
+USER   : realm_name, client_id_app , user_2 , password  , public , REMOVE-IF-EXITS
 
-# Create another REALM 
+# Create another REALM ( if it already exists then use-it , else creates one )
 REALM  : realm_name_1 
 
-## Create client into REALM realm_1
+## Create client into REALM realm_1 ( if it already exists then use-it , else creates one )
 CLIENT : realm_name_1, client_id_app_1, client_secret_id_1 , manager
 
-## Create Another client into REALM realm_1
+## Create Another client into REALM realm_1 ( if it already exists then use-it , else creates one )
 CLIENT : realm_name_1, client_id_app, client_secret_id_1   , manager   productOwner   tester
 
 # Assign to the USER_3 Roles of the Client client_id_app_1 in the realm_1 
 USER   : realm_name_1, client_id_app_1, user_3 , password  , manager
 
 # We can ALSO assign to the USER_3 roles of the Client client_id_app in the Realm realm_1
-USER   : realm_name_1, client_id_app, user_3 , password  ,  manager  productOwner  tester 
+USER   : realm_name_1, client_id_app, user_3 , password    , manager   productOwner   tester 
 
-# Create user_4
+# Create user_4 
 USER   : realm_name_1, client_id_app, user_4 , password    , tester
 
