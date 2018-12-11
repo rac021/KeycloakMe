@@ -29,7 +29,7 @@ Also provides a client that automatically create Realm, Client, Users, Roles, an
          
          Goto : http://localhost:8180/ 
  
-   * in **HTTPS** mode : 
+   * In **HTTPS** mode : 
  
          ./keycloak_starter.sh https
  
