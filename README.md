@@ -24,10 +24,12 @@ keycloakMe allows you to start a **keycloak server** in **HTTP/HTTPS mode**.
    * In **HTTP** mode  :
  
          ./keycloak_starter.sh http
+         
+         Goto : http://localhost:8180/ 
  
    * in **HTTPS** mode : 
  
          ./keycloak_starter.sh https
  
- 
+         Goto : https://localhost:8543
  
