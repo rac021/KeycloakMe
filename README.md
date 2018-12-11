@@ -1,6 +1,6 @@
 # KeycloakMe
 
-keycloakMe is a java project that allows you to create/remove Realms, Clients, Users, Roles, and affects Roles to the clients and Users juste by provinding a simple file configuration. 
+keycloakMe is a java project that allows you to create/remove Realms, Clients, Users, Roles, and affects Roles to the clients and Users juste by providing a simple file configuration. 
 
 ----------------------------------------------------------
 
