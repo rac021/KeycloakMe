@@ -4,7 +4,7 @@ keycloakMe allows you to start a **keycloak server** in **HTTP/HTTPS mode**.
 
 ----------------------------------------------------------
 
-* **Usage** :
+ **Usage** :
 
  1- Download the keyclaok server ( 4.0.6-Final ) : 
  
