@@ -8,20 +8,27 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
 
  **Usage** :
 
- 1- Download the keyclaok server ( 4.0.6-Final ) : 
+ 1- Change directory : 
  
-     https://downloads.jboss.org/keycloak/4.6.0.Final/keycloak-4.6.0.Final.zip
+     cd KeycloakMe/script_version/
+
+ 2- Download the keyclaok server ( 4.0.6-Final ) : 
  
+     wget https://downloads.jboss.org/keycloak/4.6.0.Final/keycloak-4.6.0.Final.zip 
  
- 2- Unzip **keycloak-4.6.0.Final.zip** :
+ 3- Unzip **keycloak-4.6.0.Final.zip** :
  
-     Then rename the directory keycloak-4.6.0.Final to keycloak-4.6.0
+     unzip keycloak-4.6.0.Final.zip
  
- Generte a **self-signed Certificate** : 
+ 4- rename the directory **keycloak-4.6.0.Final** to **keycloak-4.6.0** :
+ 
+     mv keycloak-4.6.0.Final keycloak-4.6.0 & keycloak-4.6.0.Final.zip
+     
+ 5- Generte a **self-signed Certificate** ( Optional ) : 
  
     ./certificate_generator.sh
  
- 3- Start keycloak server :
+ 6- Start keycloak server :
  
    * In **HTTP** mode  :
  
@@ -35,16 +42,24 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
  
          Goto : https://localhost:8543
  
-  4- Create Admin User ( with Login/Password : admin/admin ) :
+ 7- Create Initial Admin User ( with Login/Password : admin/admin ) :
   
         ./keycloak_client.sh adduser admin admin
+  
+ 8- Restart the keycloak server :
+  
+        Ctrl+C
+       
+        HTTP Mode : ./keycloak_starter.sh http 
         
+        HTTPS Mode : ./keycloak_starter.sh https 
+  
 
-  5- Create Realm, Client, Users, Roles..
+ 9- Create Realm, Client, Users, Roles.. admin/admin is Login/Password of admin user ( Master Realm ) 
   
    * IF **HTTP** MODE :
    
-         ./keycloak_client.sh http admin admin   
+         ./keycloak_client.sh http admin admin 
    
    * IF **HTTPS** MODE :
    
