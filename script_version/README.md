@@ -65,3 +65,15 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
    
          ./keycloak_client.sh https admin admin
          
+ - **This Creates :**   
+ 
+        REALM            : my_realm
+        CLIENT_ID        : my_app
+        CLIENT_SECRET_ID :11111111-1111-1111-1111-111111111111
+        USER_1           : with login admin  / password admin
+        USER_2           : with login public / password public
+        ROLE             : manager
+        
+        Affect the Role "Manager" to the Client "my_app" 
+        Affect the Role "Manager" to the user Admin 
+
