@@ -48,7 +48,7 @@
                       -keypass   $P12_STORE_PASSWORD                             \
                       -validity  $VALIDITY_IN_DAYS                               \
                       -ext san=dns:localhost,dns:localhost,                      \
-                      -dname "CN=rac021, OU=ID, O=rac021, L=Paris, S=Paris, C=YR" 
+                      -dname "CN=YR, OU=Rac021, O=Rac021, L=Paris, ST=Paris, C=FR" 
 
   
  ## IMPORT P12 to JKS 
