@@ -50,7 +50,7 @@ PATH_JKS=`pwd`/$JKS_FILE_NAME
 
 # $JKS_PASSWORD MUST BE SAME AS $JKS_DEST_KEY_PASS
 # in the script certificate_generator.sh
-JKS_PASSWORD="MY_PASSWORD_007"
+JKS_PASSWORD="my_super_password_007"
 
 ###################################################
 ###################################################
