@@ -61,7 +61,7 @@ if [[ ! -d "$KEYCLAK_DIRECTORY/" ]] ; then
 
    echo
    echo " It seems that keycloak is not installed."
-   echo " keycloak has te be installed in a directory named keycloak-4.6.0 "
+   echo " keycloak has to be installed in a directory named keycloak-4.6.0 "
    echo
    exit
 
