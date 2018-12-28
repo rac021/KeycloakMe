@@ -9,8 +9,7 @@
     echo " keycloak has to be installed in a directory named [[ $KEYCLOAK_DIRECTORY_INSTALLATION ]] " ; echo 
     exit   
  fi
- 
- 
+  
  current_script_name=`basename "$0"`
  
  echo 
@@ -19,14 +18,12 @@
  echo " To run keycloak in HTTPS mode just run the command : ./$current_script_name https"
  echo " ===================================================================================="
  echo 
- 
- 
+  
  export JBOSS_HOME=$(pwd)/$KEYCLOAK_DIRECTORY_INSTALLATION
 
  JKS_FILE_NAME="keystore.jks"
  
  PATH_CONF="$KEYCLOAK_DIRECTORY_INSTALLATION/standalone/configuration"
-
  
  ## IMPORTANT 
  # <<  https://docs.jboss.org/jbossweb/7.0.x/ssl-howto.html  >> 
@@ -109,7 +106,6 @@
  sed -i -e 's/{{KEYSTORE_PASSWORD}}/'"$KEYSTORE_PASSWORD"'/g' $defaultConf
  sed -i -e 's/{{KEY_PASSWORD}}/'"$KEY_PASSWORD"'/g'           $defaultConf
  
-
  echo 
  
  if [ "$1" = "http" -o "$1" = "" ] ; then 
