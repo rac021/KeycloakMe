@@ -34,9 +34,9 @@
  # you will get an error along the lines of java.io.IOException: Cannot recover key, 
  # as documented in Bugzilla issue 38217, which contains further references for this issue
  
- KEYSTORE_PASSWORD="MY_PASSWORD_007"
+ KEYSTORE_PASSWORD="my_super_password_007"
  
- KEY_PASSWORD="MY_PASSWORD_007"
+ KEY_PASSWORD="my_super_password_007"
  
   
  if [ ! -d $PATH_CONF/transport  ]  ; then
