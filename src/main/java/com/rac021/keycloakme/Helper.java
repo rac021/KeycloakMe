@@ -268,28 +268,27 @@ public class Helper {
         return path.substring( path.lastIndexOf('/') + 1 ) ;
     }
     
-    public static ProtocolMapperRepresentation createProtocolMapperModel( String name           ,
-                                                                          String hardcodedName  ,
-                                                                          String hardcodedValue , 
-                                                                          String claimType      ,
-                                                                          boolean accessToken   , 
-                                                                          boolean idToken )     {
+    public static ProtocolMapperRepresentation createProtocolMapperModel( String  name           ,
+                                                                          String  protocol       ,
+                                                                          String  protocolMapper , 
+                                                                          String  tokenClaimName ,
+                                                                          String  claimValue     , 
+                                                                          String  claimType      , 
+                                                                          boolean accessToken    ) {
           
-        ProtocolMapperRepresentation fooMapper = new ProtocolMapperRepresentation() ;
-        fooMapper.setName("aud")                                                    ;
-        fooMapper.setProtocol("openid-connect")                                     ;
-        fooMapper.setProtocolMapper("oidc-hardcoded-claim-mapper")                  ;
+        ProtocolMapperRepresentation fooMapper = new ProtocolMapperRepresentation()                ;
+        fooMapper.setName(name)                                                                    ;
+        fooMapper.setProtocol(protocol)                                                            ;
+        fooMapper.setProtocolMapper(protocolMapper)                                                ;
         
-        Map<String, String> config = new HashMap<>()                          ;
-        config.put(OIDCAttributeMapperHelper.JSON_TYPE, "String")             ;
-        config.put(OIDCAttributeMapperHelper.TOKEN_CLAIM_NAME, "aud")         ;
-        config.put(OIDCAttributeMapperHelper.TOKEN_CLAIM_NAME_LABEL, "aud")   ;
-        config.put(OIDCAttributeMapperHelper.INCLUDE_IN_ACCESS_TOKEN, "true") ;
-
-        config.put(HardcodedClaim.CLAIM_VALUE, "aud")                         ;
-        fooMapper.setConfig(config)                                           ;
-        return fooMapper                                                      ;
-
+        Map<String, String> config = new HashMap<>()                                               ;
+        config.put(HardcodedClaim.CLAIM_VALUE, claimValue)                                         ;
+        config.put(OIDCAttributeMapperHelper.JSON_TYPE, claimType)                                 ;
+        config.put(OIDCAttributeMapperHelper.TOKEN_CLAIM_NAME, tokenClaimName)                     ;
+        config.put(OIDCAttributeMapperHelper.INCLUDE_IN_ACCESS_TOKEN, String.valueOf(accessToken)) ;
+        
+        fooMapper.setConfig(config)                                                                ;
+        return fooMapper                                                                           ;
     }
 
 }
