@@ -172,6 +172,10 @@ public class KeycloakMe {
                                                                  secretID , 
                                                                  appProtocole ) ;
             
+                /** With recent keycloak version , the client id is apparently no longer
+                    automatically added to the audience field 'aud' of the access token,
+                    So, we have to create a mapper and overwriting the aud claim.     */
+                    
                 ProtocolMapperRepresentation createProtocolMapperModel = 
                          
                                         createProtocolMapperModel( "audience"                    ,
