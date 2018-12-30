@@ -13,13 +13,11 @@ import javax.ws.rs.core.Response ;
 import org.keycloak.admin.client.Keycloak ;
 import javax.ws.rs.WebApplicationException ;
 import org.keycloak.admin.client.resource.RealmResource ;
-import org.keycloak.protocol.oidc.mappers.HardcodedClaim;
 import org.keycloak.representations.idm.RoleRepresentation ;
 import org.keycloak.representations.idm.UserRepresentation ;
 import org.keycloak.representations.idm.RealmRepresentation ;
 import org.keycloak.representations.idm.ClientRepresentation ;
 import org.keycloak.representations.idm.CredentialRepresentation ;
-import org.keycloak.protocol.oidc.mappers.OIDCAttributeMapperHelper ;
 import org.keycloak.representations.idm.ProtocolMapperRepresentation ;
 
 /**
@@ -274,21 +272,29 @@ public class Helper {
                                                                           String  tokenClaimName ,
                                                                           String  claimValue     , 
                                                                           String  claimType      , 
-                                                                          boolean accessToken    ) {
+                                                                          boolean accessToken    )    {
           
-        ProtocolMapperRepresentation fooMapper = new ProtocolMapperRepresentation()                ;
-        fooMapper.setName(name)                                                                    ;
-        fooMapper.setProtocol(protocol)                                                            ;
-        fooMapper.setProtocolMapper(protocolMapper)                                                ;
+        ProtocolMapperRepresentation fooMapper = new ProtocolMapperRepresentation()                   ;
+        fooMapper.setName(name)                                                                       ;
+        fooMapper.setProtocol(protocol)                                                               ;
+        fooMapper.setProtocolMapper(protocolMapper)                                                   ;
         
-        Map<String, String> config = new HashMap<>()                                               ;
-        config.put(HardcodedClaim.CLAIM_VALUE, claimValue)                                         ;
-        config.put(OIDCAttributeMapperHelper.JSON_TYPE, claimType)                                 ;
-        config.put(OIDCAttributeMapperHelper.TOKEN_CLAIM_NAME, tokenClaimName)                     ;
-        config.put(OIDCAttributeMapperHelper.INCLUDE_IN_ACCESS_TOKEN, String.valueOf(accessToken)) ;
+        Map<String, String> config = new HashMap<>()                                                  ;
         
-        fooMapper.setConfig(config)                                                                ;
-        return fooMapper                                                                           ;
+        // config.put(HardcodedClaim.CLAIM_VALUE, claimValue)                                         ;
+        config.put("claim.value", claimValue)                                                         ;
+        
+        //config.put( OIDCAttributeMapperHelper.JSON_TYPE, claimType )                                ;
+        config.put("jsonType.label", claimType)                                                       ;
+        
+        // config.put( OIDCAttributeMapperHelper.TOKEN_CLAIM_NAME, tokenClaimName )                   ;
+        config.put("claim.name", tokenClaimName)                                                      ;
+        
+        // config.put(OIDCAttributeMapperHelper.INCLUDE_IN_ACCESS_TOKEN, String.valueOf(accessToken)) ;
+        config.put("access.token.claim", String.valueOf(accessToken))                                 ;
+        
+        fooMapper.setConfig(config)                                                                   ;
+        return fooMapper                                                                              ;
     }
 
 }
