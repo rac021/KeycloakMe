@@ -178,7 +178,7 @@ public class KeycloakMe {
                     
                 ProtocolMapperRepresentation createProtocolMapperModel  = 
                          
-                                        createProtocolMapperModel( "audience"                    ,
+                                        createProtocolMapperModel( "aud"                         ,
                                                                    "openid-connect"              ,
                                                                    "oidc-hardcoded-claim-mapper" , 
                                                                    "aud"                         , 
