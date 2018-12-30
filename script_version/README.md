@@ -10,7 +10,7 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
 
  1- Change directory : 
  
-     cd KeycloakMe/script_version/
+     cd script_version/
 
  2- Download the keyclaok server ( 4.8.1-Final ) : 
  
