@@ -12,23 +12,19 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
  
      cd KeycloakMe/script_version/
 
- 2- Download the keyclaok server ( 4.0.6-Final ) : 
+ 2- Download the keyclaok server ( 4.8.1-Final ) : 
  
-     wget https://downloads.jboss.org/keycloak/4.6.0.Final/keycloak-4.6.0.Final.zip 
+     wget https://downloads.jboss.org/keycloak/4.8.1.Final/keycloak-4.8.1.Final.zip 
  
- 3- Unzip **keycloak-4.6.0.Final.zip** :
+ 3- Unzip **keycloak-4.8.1.Final.zip** :
  
-     unzip keycloak-4.6.0.Final.zip
- 
- 4- rename the directory **keycloak-4.6.0.Final** to **keycloak-4.6.0** :
- 
-     mv keycloak-4.6.0.Final keycloak-4.6.0 & keycloak-4.6.0.Final.zip
-     
- 5- Generte a **self-signed Certificate** ( Optional ) : 
+     unzip keycloak-4.8.1.Final.zip
+
+ 4- Generte a **self-signed Certificate** ( Optional ) : 
  
     ./certificate_generator.sh
  
- 6- Start keycloak server :
+ 5- Start keycloak server :
  
    * In **HTTP** mode  :
  
@@ -42,11 +38,11 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
  
          Goto : https://localhost:8543
  
- 7- Create Initial Admin User ( with Login/Password : admin/admin ) :
+ 6- Create Initial Admin User ( with Login/Password : admin/admin ) :
   
         ./keycloak_client.sh adduser admin admin
   
- 8- Restart the keycloak server :
+ 7- Restart the keycloak server ( if step 6 was processed ) :
   
         Ctrl+C
        
@@ -55,7 +51,7 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
         HTTPS Mode : ./keycloak_starter.sh https 
   
 
- 9- Create Realm, Client, Users, Roles.. admin/admin is Login/Password of admin user ( Master Realm ) 
+ 8- Create Realm, Client, Users, Roles.. admin/admin is Login/Password of admin user ( Master Realm ) 
   
    * IF **HTTP** MODE :
    
@@ -69,7 +65,7 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
  
         REALM            : my_realm
         CLIENT_ID        : my_app
-        CLIENT_SECRET_ID :11111111-1111-1111-1111-111111111111
+        CLIENT_SECRET_ID : my_secret
         USER_1           : with login admin  / password admin
         USER_2           : with login public / password public
         ROLE             : manager
