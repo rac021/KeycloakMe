@@ -27,7 +27,9 @@ HTTPS_SERVER_BASE="https://localhost:8543"
 
 SERVER_AUTH="$HTTP_SERVER_BASE/auth" 
 
-KEYCLAK_DIRECTORY="keycloak-4.6.0/bin"
+KEYCLOAK_DIRECTORY_NAME="keycloak-4.8.1.Final"
+
+KEYCLAK_DIRECTORY="$KEYCLOAK_DIRECTORY_NAME/bin"
 
 ####################################################
 ####################################################
@@ -35,7 +37,7 @@ KEYCLAK_DIRECTORY="keycloak-4.6.0/bin"
 ### REMOVE IF EXISTS ###############################
 ####################################################
 
-REMOVE_IF_EXISTS="false"
+REMOVE_IF_EXISTS="true"
 
 ####################################################
 
@@ -57,17 +59,17 @@ JKS_PASSWORD="my_super_password_007"
 
 echo 
 
-if [[ ! -d "$KEYCLAK_DIRECTORY/" ]] ; then 
+if [[ ! -d "$KEYCLAK_DIRECTORY_BIN/" ]] ; then 
 
    echo
    echo " It seems that keycloak is not installed."
-   echo " keycloak has to be installed in a directory named keycloak-4.6.0 "
+   echo " keycloak has to be installed in a directory named $KEYCLOAK_DIRECTORY_NAME "
    echo
    exit
 
 fi
 
-cd $KEYCLAK_DIRECTORY
+cd $KEYCLAK_DIRECTORY_BIN
 
 ##################################################
 ## CHECK LOGIN AND PASSWORD ######################
@@ -136,7 +138,6 @@ if [[ "$1" = "adduser" ]] ; then
  
 fi
 
-
 ## Authenticattion # Credentials
   
 ./kcadm.sh config credentials --server $SERVER_AUTH \
@@ -196,9 +197,12 @@ ALREADY_EXISTS_CLIENT=`./kcadm.sh get clients -r  $REALM --fields id  -q clientI
 
 ## Client exists 
 if [[ $ALREADY_EXISTS_CLIENT !=  "[ ]" ]] ; then 
+
    EXISTS_CLIENT_ID=` echo ${ALREADY_EXISTS_CLIENT##*: \"} `
    EXISTS_CLIENT_ID=` echo ${EXISTS_CLIENT_ID/\" \} ]}     `
+   
 else
+
 ## Client doesn't exists yet 
    EXISTS_CLIENT_ID=""
 fi
@@ -237,15 +241,18 @@ echo ; echo " Manage users -- " ; echo
 # Create a new user
 echo " Create User ( $ADMIN_USER_NAME ) and Enabale it "
 ./kcadm.sh create users -r $REALM -s username=$ADMIN_USER_NAME -s enabled=true 
+
 echo; echo " Create User ( $PUBLIC_USER_NAME ) and Enabale it "
 ./kcadm.sh create users -r $REALM -s username=$PUBLIC_USER_NAME -s enabled=true
+
 echo ; echo " Update User ( $ADMIN_USER_NAME ), set password  to :  $PASSWORD_ADMIN "
 ./kcadm.sh set-password -r $REALM --username $ADMIN_USER_NAME --new-password $PASSWORD_ADMIN
+
 echo ; echo " Update User ( $PUBLIC_USER_NAME ), set password  to : $PASSWORD_PUBLIC "
 ./kcadm.sh set-password -r $REALM --username $PUBLIC_USER_NAME --new-password $PASSWORD_PUBLIC
 
 
-#Add client role to a user
+# Add client role to a user
 
 # ./kcadm.sh add-roles -r $REALM --uusername $ADMIN_USER_NAME  \
 #                                --rolename jaxy_admin_role --rolename jaxy_public_role 
@@ -274,3 +281,18 @@ echo " Add The Role ( $ROLE ) of the client ( $CLIENT_ID ) in the REALM ( $REALM
 echo
 
 
+ ## With recent keycloak version , the client id is apparently no longer
+ ## automatically added to the audience field 'aud' of the access token.
+ ## So, we have to create a mapper and overwriting the aud claim.
+                                             
+./kcadm.sh create clients/$ClientUUID/protocol-mappers/models \
+           -r $REALM                                          \
+           -s name=aud                                        \
+           -s protocol=openid-connect                         \
+           -s protocolMapper=oidc-hardcoded-claim-mapper      \
+           -s "config.\"jsonType.label\"=String"              \
+           -s "config.\"access.token.claim\"=true"            \
+           -s "config.\"claim.name\"=aud"                     \
+           -s "config.\"claim.value\"=$CLIENT_ID"
+        
+ 
