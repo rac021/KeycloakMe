@@ -29,7 +29,7 @@ SERVER_AUTH="$HTTP_SERVER_BASE/auth"
 
 KEYCLOAK_DIRECTORY_NAME="keycloak-4.8.1.Final"
 
-KEYCLAK_DIRECTORY="$KEYCLOAK_DIRECTORY_NAME/bin"
+KEYCLAK_DIRECTORY_BIN="$KEYCLOAK_DIRECTORY_NAME/bin"
 
 ####################################################
 ####################################################
@@ -138,6 +138,7 @@ if [[ "$1" = "adduser" ]] ; then
  
 fi
 
+
 ## Authenticattion # Credentials
   
 ./kcadm.sh config credentials --server $SERVER_AUTH \
@@ -150,6 +151,13 @@ echo
 ################################
 ## REALM #######################
 ################################
+
+if [ $REMOVE_IF_EXISTS == "true" ]; then
+
+   echo " **** Warning : REMOVE_IF_EXISTS == true => the realm [ $REALM ] will be REMOVED and RECREATED "
+   echo
+    
+fi 
 
 RESULT_REALM=`./kcadm.sh get realms/$REALM --fields id   2>&1 `
 
@@ -197,12 +205,9 @@ ALREADY_EXISTS_CLIENT=`./kcadm.sh get clients -r  $REALM --fields id  -q clientI
 
 ## Client exists 
 if [[ $ALREADY_EXISTS_CLIENT !=  "[ ]" ]] ; then 
-
    EXISTS_CLIENT_ID=` echo ${ALREADY_EXISTS_CLIENT##*: \"} `
    EXISTS_CLIENT_ID=` echo ${EXISTS_CLIENT_ID/\" \} ]}     `
-   
 else
-
 ## Client doesn't exists yet 
    EXISTS_CLIENT_ID=""
 fi
@@ -252,7 +257,7 @@ echo ; echo " Update User ( $PUBLIC_USER_NAME ), set password  to : $PASSWORD_PU
 ./kcadm.sh set-password -r $REALM --username $PUBLIC_USER_NAME --new-password $PASSWORD_PUBLIC
 
 
-# Add client role to a user
+#Add client role to a user
 
 # ./kcadm.sh add-roles -r $REALM --uusername $ADMIN_USER_NAME  \
 #                                --rolename jaxy_admin_role --rolename jaxy_public_role 
@@ -295,4 +300,3 @@ echo
            -s "config.\"claim.name\"=aud"                     \
            -s "config.\"claim.value\"=$CLIENT_ID"
         
- 
