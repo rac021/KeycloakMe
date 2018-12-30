@@ -1,6 +1,6 @@
 #!/bin/bash
 
- KEYCLOAK_DIRECTORY_INSTALLATION="keycloak-4.6.0"
+ KEYCLOAK_DIRECTORY_INSTALLATION="keycloak-4.8.1.Final"
  
  if [ ! -d $(pwd)/$KEYCLOAK_DIRECTORY_INSTALLATION ]  ; then
  
@@ -26,7 +26,7 @@
  PATH_CONF="$KEYCLOAK_DIRECTORY_INSTALLATION/standalone/configuration"
  
  ## IMPORTANT 
- # <<  https://docs.jboss.org/jbossweb/7.0.x/ssl-howto.html  >> 
+ # >> https://docs.jboss.org/jbossweb/7.0.x/ssl-howto.html  << 
  # Note: your private key password and keystore password should be the same. If they differ, 
  # you will get an error along the lines of java.io.IOException: Cannot recover key, 
  # as documented in Bugzilla issue 38217, which contains further references for this issue
@@ -120,6 +120,5 @@
  
  sleep 3
  
- $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 
-
+ $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100
 
