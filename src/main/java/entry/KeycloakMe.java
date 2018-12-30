@@ -108,7 +108,7 @@ public class KeycloakMe {
                                      .resteasyClient (
                                         new ResteasyClientBuilder()
                                             .connectionPoolSize(2)
-                                            .keyStore(keystore, key) 
+                                            .keyStore(keystore, key)
                                             .build() )
                                      .build() ;
        
@@ -178,12 +178,12 @@ public class KeycloakMe {
                     
                 ProtocolMapperRepresentation createProtocolMapperModel  = 
                          
-                                        createProtocolMapperModel( "aud"                         ,
+                                        createProtocolMapperModel( "audience"                    ,
                                                                    "openid-connect"              ,
-                                                                   "oidc-hardcoded-claim-mapper" , 
-                                                                   "aud"                         , 
-                                                                   "aud"                         , 
-                                                                   "String"                      , 
+                                                                   "oidc-hardcoded-claim-mapper" ,
+                                                                   "aud"                         ,
+                                                                   clientID                      ,
+                                                                   "String"                      ,
                                                                    false                       ) ;
                  
                 client.setProtocolMappers(Arrays.asList(createProtocolMapperModel ) )            ;
@@ -258,7 +258,7 @@ public class KeycloakMe {
                  /** CREATE NEW USER **/
                  Response responseSavedUserAdmin  = createAndSaveUserInRealm( kc          ,
                                                                               realm       ,
-                                                                              userName    , 
+                                                                              userName    ,
                                                                               password  ) ;
 
                  userUuid     =      getUUIDFromResponse(responseSavedUserAdmin )         ;
@@ -286,9 +286,9 @@ public class KeycloakMe {
                 }
                 RoleRepresentation available  =
                         
-                        getAvailableClientRolesForUser( kc                                       , 
-                                                        realm                                    , 
-                                                        clientsIDs.get( realm + "_" + clientID ) ,  
+                        getAvailableClientRolesForUser( kc                                       ,
+                                                        realm                                    ,
+                                                        clientsIDs.get( realm + "_" + clientID ) ,
                                                         _userUuid                                ,
                                                         roleString  )                            ;
                 
