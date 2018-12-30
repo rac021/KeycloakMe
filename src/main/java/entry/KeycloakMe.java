@@ -184,7 +184,7 @@ public class KeycloakMe {
                                                                    "aud"                         ,
                                                                    clientID                      ,
                                                                    "String"                      ,
-                                                                   "true"                      ) ;
+                                                                   true                        ) ;
                  
                 client.setProtocolMappers(Arrays.asList(createProtocolMapperModel ) )            ;
                     
