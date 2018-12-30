@@ -176,7 +176,7 @@ public class KeycloakMe {
                     automatically added to the audience field 'aud' of the access token,
                     So, we have to create a mapper and overwriting the aud claim.     */
                     
-                ProtocolMapperRepresentation createProtocolMapperModel = 
+                ProtocolMapperRepresentation createProtocolMapperModel  = 
                          
                                         createProtocolMapperModel( "audience"                    ,
                                                                    "openid-connect"              ,
@@ -185,11 +185,13 @@ public class KeycloakMe {
                                                                    "aud"                         , 
                                                                    "String"                      , 
                                                                    false                       ) ;
+                 
+                client.setProtocolMappers(Arrays.asList(createProtocolMapperModel ) )            ;
                     
                 clientUuid = client.getId()                                                      ;
                 
-                try ( Response responseSavedClientInRealm = saveClientInRealm( kc    ,
-                                                                               realm , 
+                try ( Response responseSavedClientInRealm = saveClientInRealm( kc      ,
+                                                                               realm   , 
                                                                                client )) {
                     
                    clientUuid = getUUIDFromResponse( responseSavedClientInRealm )        ;
