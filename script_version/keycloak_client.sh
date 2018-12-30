@@ -300,3 +300,5 @@ echo
            -s "config.\"claim.name\"=aud"                     \
            -s "config.\"claim.value\"=$CLIENT_ID"
         
+echo 
+
