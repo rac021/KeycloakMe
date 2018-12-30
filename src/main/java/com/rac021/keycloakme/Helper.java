@@ -71,6 +71,7 @@ public class Helper {
         
         RealmRepresentation realm = new RealmRepresentation()     ;
         realm.setRealm( realmName  )                              ;
+        realm.setEnabled( true  )                                 ;
         kc.realms().create(realm)                                 ;
         return realm                                              ;
      
