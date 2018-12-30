@@ -42,7 +42,7 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
   
         ./keycloak_client.sh adduser admin admin
   
- 7- Restart the keycloak server ( if step 6 was processed ) :
+ 7- Restart the keycloak server ( if step 6 was performed ) :
   
         Ctrl+C
        
