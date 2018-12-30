@@ -21,6 +21,7 @@ import org.keycloak.admin.client.KeycloakBuilder ;
 import org.keycloak.representations.idm.RoleRepresentation ;
 import org.keycloak.representations.idm.ClientRepresentation ;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder ;
+import org.keycloak.representations.idm.ProtocolMapperRepresentation ;
 
 /**
  *
@@ -171,16 +172,26 @@ public class KeycloakMe {
                                                                  secretID , 
                                                                  appProtocole ) ;
             
-                clientUuid = client.getId()                                     ;
+                ProtocolMapperRepresentation createProtocolMapperModel = 
+                         
+                                        createProtocolMapperModel( "audience"                    ,
+                                                                   "openid-connect"              ,
+                                                                   "oidc-hardcoded-claim-mapper" , 
+                                                                   "aud"                         , 
+                                                                   "aud"                         , 
+                                                                   "String"                      , 
+                                                                   false                       ) ;
+                    
+                clientUuid = client.getId()                                                      ;
                 
                 try ( Response responseSavedClientInRealm = saveClientInRealm( kc    ,
                                                                                realm , 
                                                                                client )) {
                     
-                   clientUuid = getUUIDFromResponse( responseSavedClientInRealm ) ;
+                   clientUuid = getUUIDFromResponse( responseSavedClientInRealm )        ;
                    
                    System.out.println( " Created Client ( " + clientID                   +
-                                       " ) In the Realm ( " + realm + " ) With - UUID : "
+                                       " )  In the Realm ( " + realm + " ) With - UUID : "
                                        + clientUuid  )  ;
                 }
                 
