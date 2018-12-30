@@ -30,6 +30,20 @@ REALM_MASTER_AUTHENTICATION : master, admin-cli , admin , admin, openid-connect
 ##################################################################################
 
 ## Create Realm  ( remove it if it already axists )
+REALM  : my_realm , REMOVE-IF-EXITS
+
+## Create Client ( remove it if it already axists )
+CLIENT : my_realm, my_app , my_secret , admin public  manager test , REMOVE-IF-EXITS
+
+## Create User ONE ( remove it if it already axists )
+USER   : my_realm, my_app , admin , admin  , admin  manager , REMOVE-IF-EXITS
+
+## Create User TWO ( remove it if it already axists )
+USER   : my_realm, my_app , public , public  , public , REMOVE-IF-EXITS
+
+######################
+
+## Create Realm  ( remove it if it already axists )
 REALM  : realm_name , REMOVE-IF-EXITS
 
 ## Create Client ( remove it if it already axists )
