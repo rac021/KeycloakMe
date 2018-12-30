@@ -2,20 +2,25 @@
 package com.rac021.keycloakme ;
 
 import java.net.URI ;
+import java.util.Map ;
 import java.util.List ;
 import java.util.UUID ;
 import java.util.Arrays ;
+import java.util.HashMap;
 import java.util.Optional ;
 import java.util.LinkedList ;
 import javax.ws.rs.core.Response ;
 import org.keycloak.admin.client.Keycloak ;
 import javax.ws.rs.WebApplicationException ;
 import org.keycloak.admin.client.resource.RealmResource ;
+import org.keycloak.protocol.oidc.mappers.HardcodedClaim;
 import org.keycloak.representations.idm.RoleRepresentation ;
 import org.keycloak.representations.idm.UserRepresentation ;
 import org.keycloak.representations.idm.RealmRepresentation ;
 import org.keycloak.representations.idm.ClientRepresentation ;
 import org.keycloak.representations.idm.CredentialRepresentation ;
+import org.keycloak.protocol.oidc.mappers.OIDCAttributeMapperHelper ;
+import org.keycloak.representations.idm.ProtocolMapperRepresentation ;
 
 /**
  *
@@ -261,6 +266,30 @@ public class Helper {
         
         String path = location.getPath()                   ;
         return path.substring( path.lastIndexOf('/') + 1 ) ;
+    }
+    
+    public static ProtocolMapperRepresentation createProtocolMapperModel( String name           ,
+                                                                          String hardcodedName  ,
+                                                                          String hardcodedValue , 
+                                                                          String claimType      ,
+                                                                          boolean accessToken   , 
+                                                                          boolean idToken )     {
+          
+        ProtocolMapperRepresentation fooMapper = new ProtocolMapperRepresentation() ;
+        fooMapper.setName("aud")                                                    ;
+        fooMapper.setProtocol("openid-connect")                                     ;
+        fooMapper.setProtocolMapper("oidc-hardcoded-claim-mapper")                  ;
+        
+        Map<String, String> config = new HashMap<>()                          ;
+        config.put(OIDCAttributeMapperHelper.JSON_TYPE, "String")             ;
+        config.put(OIDCAttributeMapperHelper.TOKEN_CLAIM_NAME, "aud")         ;
+        config.put(OIDCAttributeMapperHelper.TOKEN_CLAIM_NAME_LABEL, "aud")   ;
+        config.put(OIDCAttributeMapperHelper.INCLUDE_IN_ACCESS_TOKEN, "true") ;
+
+        config.put(HardcodedClaim.CLAIM_VALUE, "aud")                         ;
+        fooMapper.setConfig(config)                                           ;
+        return fooMapper                                                      ;
+
     }
 
 }
