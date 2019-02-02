@@ -12,13 +12,13 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
  
      cd script_version/
 
- 2- Download the keyclaok server ( 4.8.1-Final ) : 
+ 2- Download the keyclaok server ( 4.8.3-Final ) : 
  
-     wget https://downloads.jboss.org/keycloak/4.8.1.Final/keycloak-4.8.1.Final.zip 
+     wget https://downloads.jboss.org/keycloak/4.8.3.Final/keycloak-4.8.3.Final.zip 
  
- 3- Unzip **keycloak-4.8.1.Final.zip** :
+ 3- Unzip **keycloak-4.8.3.Final.zip** :
  
-     unzip keycloak-4.8.1.Final.zip
+     unzip keycloak-4.8.3.Final.zip
 
  4- Generte a **self-signed Certificate** ( Optional ) : 
  
