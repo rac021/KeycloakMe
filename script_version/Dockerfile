@@ -11,6 +11,8 @@
 
  COPY . /app/
 
+ RUN chmod +x /app/*.sh
+
  WORKDIR /app/
 
  RUN apt-get upgrade              && \
