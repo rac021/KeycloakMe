@@ -1,6 +1,6 @@
 #!/bin/bash
 
- KEYCLOAK_DIRECTORY_INSTALLATION="keycloak-4.8.1.Final"
+ KEYCLOAK_DIRECTORY_INSTALLATION="keycloak-4.8.3.Final"
  
  if [ ! -d $(pwd)/$KEYCLOAK_DIRECTORY_INSTALLATION ]  ; then
  
