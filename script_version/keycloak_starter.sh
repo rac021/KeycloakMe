@@ -123,21 +123,30 @@
  
  sleep 2
  
+ echo " Start Keycloak ... "
+
  $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 &
 
- sleep 3
+ sleep 10
  
  ## FROM DOCKER VARIABLE_ENV
- if [[ "$MODE" = "DEMO" ]]  ; then  
+ if [ "$MODE" = "DEMO" ]  ; then  
    
+     echo ; echo " ## Create User in Keycloak with login/password : admin/admin " ; echo
+
      ./keycloak_client.sh adduser admin admin
      
      fuser -k 8180/tcp 
      fuser -k 8543/tcp
+
+     echo ; echo " ## re Start Keycloak ... " ; echo 
+
+     $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 &
+
+     sleep 10 
+
+     ./keycloak_client.sh http admin admin &
+
  fi
  
-  
- $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 &
-
- ./keycloak_client.sh http admin admin 
  
