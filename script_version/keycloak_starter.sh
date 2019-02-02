@@ -60,7 +60,7 @@
  echo 
  
    
- if [[ "$1" = "https"  ]]      ; then
+ if [[ "$1" = "https" || "$TRANSPORT" = "https" ]] ; then
   
    if [ -f "$PATH_CONF/$JKS_FILE_NAME" ]  ; then
    
@@ -80,7 +80,7 @@
  httpsDest="$PATH_CONF/standalone_HTTPS.xml"
  
  
- if [ "$1" = "https" ] ; then 
+ if [[ "$1" = "https"  || "$TRANSPORT" = "https"  ]] ; then 
  
     cp $httpsSource $httpsDest 
     toRename=$httpsDest 
@@ -130,6 +130,14 @@
  ## FROM DOCKER VARIABLE_ENV
  if [[ "$MODE" = "DEMO" ]]  ; then  
    
-     ./keycloak_client.sh
+     ./keycloak_client.sh adduser admin admin
+     
+     fuser -k 8180/tcp 
+     fuser -k 8543/tcp
  fi
+ 
+  
+ $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 &
+
+ ./keycloak_client.sh http admin admin 
  
