@@ -42,7 +42,11 @@
     cp -r keycloak_4_conf/transport $PATH_CONF
    
  fi
- 
+
+ ## FROM DOCKER VARIABLE_ENV
+ if [[ "$TRANSPORT" = "https" ]]  ; then     
+     ./certificate_generator.sh
+ fi
  
  if [[ "$1" = "https" &&  ! -f $JKS_FILE_NAME  ]]  ; then  
    
@@ -67,7 +71,6 @@
  
  fi 
  
-
  defaultConf="$PATH_CONF/standalone.xml"
 
  httpSource="$PATH_CONF/transport/standalone_HTTP.xml"
@@ -118,7 +121,15 @@
  
  echo
  
+ sleep 2
+ 
+ $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 &
+
  sleep 3
  
- $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100
-
+ ## FROM DOCKER VARIABLE_ENV
+ if [[ "$MODE" = "DEMO" ]]  ; then  
+   
+     ./keycloak_client.sh
+ fi
+ 
