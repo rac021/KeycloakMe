@@ -3,7 +3,7 @@
  # Step : Package image ##
  #########################
 
- FROM debian:buster-slim
+ FROM openjdk:8u181-jdk-stretch
 
  ENV DEBIAN_FRONTEND noninteractive
 
