@@ -42,11 +42,6 @@
     cp -r keycloak_4_conf/transport $PATH_CONF
    
  fi
-
- ## FROM DOCKER VARIABLE_ENV
- if [[ "$TRANSPORT" = "https" ]]  ; then     
-     ./certificate_generator.sh
- fi
  
  if [[ "$1" = "https" &&  ! -f $JKS_FILE_NAME  ]]  ; then  
    
@@ -57,10 +52,9 @@
      exit      
  fi
  
- echo 
- 
+ echo  
    
- if [[ "$1" = "https" || "$TRANSPORT" = "https" ]] ; then
+ if [[ "$1" = "https"  ]] ; then
   
    if [ -f "$PATH_CONF/$JKS_FILE_NAME" ]  ; then
    
@@ -80,7 +74,7 @@
  httpsDest="$PATH_CONF/standalone_HTTPS.xml"
  
  
- if [[ "$1" = "https"  || "$TRANSPORT" = "https"  ]] ; then 
+ if [[ "$1" = "https"  ]] ; then 
  
     cp $httpsSource $httpsDest 
     toRename=$httpsDest 
@@ -127,26 +121,3 @@
 
  $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 &
 
- sleep 10
- 
- ## FROM DOCKER VARIABLE_ENV
- if [ "$MODE" = "DEMO" ]  ; then  
-   
-     echo ; echo " ## Create User in Keycloak with login/password : admin/admin " ; echo
-
-     ./keycloak_client.sh adduser admin admin
-     
-     fuser -k 8180/tcp 
-     fuser -k 8543/tcp
-
-     echo ; echo " ## re Start Keycloak ... " ; echo 
-
-     $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 &
-
-     sleep 10 
-
-     ./keycloak_client.sh http admin admin &
-
- fi
- 
- 
