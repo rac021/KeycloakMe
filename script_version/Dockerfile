@@ -23,6 +23,6 @@
 
  RUN unzip /app/keycloak-4.8.3.Final.zip && rm /app/keycloak-4.8.3.Final.zip
 
- ENTRYPOINT ["/bin/bash", "-c", "/app/keycloak_starter.sh && tail -f /dev/null "]
+ ENTRYPOINT ["/bin/bash", "-c", "/app/keycloak_in_docker_starter.sh && tail -f /dev/null "]
 
  CMD []
