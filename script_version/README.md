@@ -73,3 +73,31 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
         Affect the Role "Manager" to the Client "my_app" 
         Affect the Role "Manager" to the user Admin 
 
+---
+
+### Using Docker ( [Dockerfile](https://github.com/rac021/KeycloakMe/blob/master/script_version/Dockerfile) ) :
+
+* 1 - Http Mode :
+
+```
+         docker run -d  -p 8180:8180         \
+                        -e "TRANSPORT=http"  \
+                        -e "MODE=DEMO"       \
+                        --name keycloakme    \
+                        rac021/jaxy-keycloakme
+                    
+         URL :  http://ip:8180 
+```
+
+* 2 - Https Mode :
+
+```
+         docker run -d -p 8543:8543         \
+                       -e "TRANSPORT=https" \
+                       -e "MODE=DEMO"       \
+                       --name keycloakme    \
+                       rac021/jaxy-keycloakme
+                    
+         URL :  https://ip:8543 
+```
+
