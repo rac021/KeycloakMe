@@ -77,7 +77,10 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
 
 ### Using Docker ( [Dockerfile](https://github.com/rac021/KeycloakMe/blob/master/script_version/Dockerfile) ) :
 
-* 1 - Http Mode :
+   **Note :** The script used in the docker image for creating clients, realms, users and roles is [ keycloak_client.sh ]( https://github.com/rac021/KeycloakMe/blob/master/script_version/keycloak_client.sh )
+
+
+   * 1 - Http Mode :
 
 ```
          docker run -d  -p 8180:8180         \
@@ -89,7 +92,7 @@ Also provides a client that automatically creates Realm, Client, Users, Roles, a
          URL :  http://ip:8180 
 ```
 
-* 2 - Https Mode :
+   * 2 - Https Mode :
 
 ```
          docker run -d -p 8543:8543         \
