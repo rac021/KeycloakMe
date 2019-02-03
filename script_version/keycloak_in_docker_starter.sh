@@ -2,21 +2,25 @@
 
  TRANSPORT_MODE="http"
   
- killKeycloak()    {
-   
-   fuser -k 8180/tcp 
-   fuser -k 8543/tcp
+ stopKeycloak()    {
+
+    echo ; echo " ## Stop Keycloak ... "; echo 
+    fuser -k 8543/tcp
+    fuser -k 8081/tcp
+
+   ./keycloak-4.8.3.Final/bin/jboss-cli.sh --connect controller=localhost:10090 command=:shutdown
+ 
+   sleep 3
+
  } 
  
- startKeycloak()    {
+ startKeycloak()   {
    
-    if [ "$TRANSPORT_MODE" = "https" ] ; then
-  
-       ./keycloak_starter.sh https
-    else
-       ./keycloak_starter.sh http
-    fi
- 
+     echo ; echo " ## Start Keycloak ... "; echo 
+   
+    ./keycloak_starter.sh $TRANSPORT_MODE &
+    
+    sleep 10
  }  
 
  if [[ "$1" = "https" || "$TRANSPORT" = "https" ]] ; then
@@ -41,16 +45,13 @@
 
      ./keycloak_client.sh adduser admin admin
      
-     killKeycloak # must restart Keycloak when adding user
+     stopKeycloak # must restart Keycloak when adding user
 
      echo ; echo " ## re Start Keycloak ... " ; echo 
 
      startKeycloak
-
-     sleep 10 
-
-     ./keycloak_client.sh http admin admin &
-
+     
+    ./keycloak_client.sh $TRANSPORT_MODE admin admin &
+  
  fi
- 
  
