@@ -28,3 +28,4 @@
  ENTRYPOINT ["/bin/bash", "-c", "/app/keycloak_in_docker_starter.sh && tail -f /dev/null "]
 
  CMD []
+
