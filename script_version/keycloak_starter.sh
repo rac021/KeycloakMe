@@ -117,7 +117,7 @@
  
  sleep 2
  
- echo " Start Keycloak ... "
+ echo " Start Keycloak ... " ; echo 
 
  $KEYCLOAK_DIRECTORY_INSTALLATION/bin/standalone.sh  -b 0.0.0.0 -Djboss.socket.binding.port-offset=100 &
 
